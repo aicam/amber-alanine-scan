@@ -1,0 +1,20 @@
+amber:
+  input_tleap_config: tleap.template.in
+  input_mmpbsa_config: mmpbsa.template.in
+  trajectory_path: ./6m0j_simulation
+  tmp_path: ./tmp
+runner:
+  memory_size: 10000
+  cpu_cores: 3
+  tleap_batch_size: 5
+  mmpbsa_script: mmpbsa_slurm.template.sh
+scan:
+  mutations: [417, 439]
+  only_parameterization: false
+  skip_parameterization: true
+  update_atom_radii: true
+  atom_radii:
+    - C: 1.4001
+    - H: 1.5501
+
+

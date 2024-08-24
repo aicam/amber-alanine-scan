@@ -1,0 +1,16 @@
+source leaprc.protein.ff19SB
+source leaprc.water.opc
+set default PBRadii mbondi2
+complex = loadpdb wildtype_complex.pdb
+ligand = loadpdb wildtype_ligand.pdb
+receptor = loadpdb wildtype_receptor.pdb
+saveamberparm complex wildtype_complex.prmtop wildtype_complex.inpcrd
+saveamberparm receptor wildtype_receptor.prmtop wildtype_receptor.inpcrd
+saveamberparm ligand wildtype_ligand.prmtop wildtype_ligand.inpcrd
+solvatebox complex TIP3PBOX 12.0
+saveamberparm complex wildtype_complex_solvated.prmtop wildtype_complex_solvated.inpcrd
+com_mut = loadpdb mutation_complex.pdb
+lig_mut = loadpdb mutation_ligand.pdb
+saveamberparm com_mut mutation_complex.prmtop mutation_complex.inpcrd
+saveamberparm lig_mut mutation_ligand.prmtop mutation_ligand.inpcrd
+quit
