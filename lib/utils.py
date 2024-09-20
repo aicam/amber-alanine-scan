@@ -48,7 +48,8 @@ def parse_config_yml(config_file: str) -> dict:
     with open(config_file, 'r') as file:
         data = yaml.safe_load(file)
 
-    data['scan']['atom_radii'] = Element.map_atom_radii_dict(data['scan']['atom_radii'])
+    if 'atom_radii' in data['scan']:
+        data['scan']['atom_radii'] = Element.map_atom_radii_dict(data['scan']['atom_radii'])
     if not data['scan']['only_parameterization']:
         data['amber']['trajectory_path'] = os.path.abspath(data['amber']['trajectory_path'])
     return data

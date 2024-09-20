@@ -47,7 +47,7 @@ def process_batch(batch: List[str], args: Namespace, config_params: dict) -> Non
         if num_errs > 0:
             logging.error(f"tLEAP failed on parameterizing files with log {err}")
             exit(-1)
-        if config_params['scan']['update_atom_radii']:
+        if 'update_atom_radii' in config_params['scan'] and config_params['scan']['update_atom_radii']:
             for topology_file in topologies_list:
                 update_radii(topology_file, config_params['scan']['atom_radii'])
         os.chdir(origin_dir)

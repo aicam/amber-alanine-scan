@@ -7,7 +7,8 @@ def parse_main_arguments() -> Namespace:
     parser.add_argument(
         '--extract-result', '-e',
         type=bool,
-        required=True,
+        required=False,
+        default=False,
         help='Indicates whether its time to run or extract the result after all jobs are finished'
     )
     parser.add_argument(

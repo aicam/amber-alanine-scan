@@ -43,16 +43,20 @@ def extract_result(args, config_params) -> None:
     final_arr = []
     working_dirs = os.listdir(tmp_dir)
     for working_dir in working_dirs:
-        final_arr.append(parse_file(f"{os.path.abspath(tmp_dir)}/{working_dir}/FINAL_RESULTS.dat"))
+        if not os.path.exists(f"{os.path.abspath(tmp_dir)}/{working_dir}/FINAL_RESULTS.dat"):
+            print(f"Error happened in running alanine scanning in {os.path.abspath(tmp_dir)}/{working_dir}")
+            continue
+        final_arr.append(parse_file(f"{os.path.abspath(tmp_dir)}/{working_dir}/FINAL_RESULTS.dat", working_dir))
 
     df = pd.DataFrame(final_arr)
     df.to_csv(output_name, index=False)
 
-def parse_file(file):
+def parse_file(file, working_dir):
     f = open(file, 'r')
     content = f.read()
 
     final_dict = {}
+    final_dict.update({"working_dir": working_dir})
     for method in ['gb', 'pb', 'gbnsr6']:
         calc_content = content.split(method_separators[method])[1].split(calc_separator)[0] + \
                        content.split(method_separators[method])[2].split('RESULT OF ALANINE SCANNING')[0]
