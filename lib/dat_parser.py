@@ -61,7 +61,6 @@ def parse_file(file, working_dir):
         calc_content = content.split(method_separators[method])[1].split(calc_separator)[0] + \
                        content.split(method_separators[method])[2].split('RESULT OF ALANINE SCANNING')[0]
         final_dict.update(extract_components(calc_content, method))
-
     return final_dict
 
 def extract_components(content: str, method: str) -> dict:
